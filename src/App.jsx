@@ -1,12 +1,11 @@
 import React from 'react';
 import './App.css';
+import Login from './components/page/Login';
 
 function App() {
   return (
     <>
-      <div>
-        <h1>Hello world!</h1>
-      </div>
+      <Login />
     </>
   );
 }
