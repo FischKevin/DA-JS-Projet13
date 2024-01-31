@@ -1,9 +1,13 @@
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
 
 function MainSignIn() {
+  const navigate = useNavigate();
   // Function to handle the form submission
   const handleSubmit = (event) => {
     event.preventDefault();
+
+    navigate('/user');
   };
 
   return (
