@@ -5,7 +5,7 @@ import SignInItem from './SignInItem';
 function Navbar() {
   return (
     <>
-      <div className='main-nav'>
+      <div className="main-nav">
         <Logo />
         <SignInItem />
       </div>

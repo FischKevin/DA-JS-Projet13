@@ -1,6 +1,6 @@
 import React from 'react';
 
-const SignInItem = () => {
+function SignInItem() {
   return (
     <div>
       <a className="main-nav-item" href="./sign-in.html">
