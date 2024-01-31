@@ -1,1 +1,7 @@
-// @import 'base/reset';
+@import 'base/base.scss';
+
+@import 'components/loginPage/logo.scss';
+@import 'components/loginPage/navbar.scss';
+@import 'components/loginPage/signInItem.scss';
+
+@import 'components/pages/loginPage.scss';
