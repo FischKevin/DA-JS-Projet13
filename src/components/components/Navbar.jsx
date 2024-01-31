@@ -4,12 +4,10 @@ import SignInItem from './SignInItem';
 
 function Navbar() {
   return (
-    <>
-      <div className="main-nav">
-        <Logo />
-        <SignInItem />
-      </div>
-    </>
+    <nav className='main-nav'>
+      <Logo />
+      <SignInItem />
+    </nav>
   );
 }
 

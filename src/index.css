@@ -11,7 +11,12 @@ html body {
   flex-direction: column;
   min-height: 100vh;
 }
-html body .sr-only {
+html body #root {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+html body #root .sr-only {
   border: 0 !important;
   clip: rect(1px, 1px, 1px, 1px) !important; /* 1 */
   -webkit-clip-path: inset(50%) !important;
@@ -24,10 +29,10 @@ html body .sr-only {
   width: 1px !important;
   white-space: nowrap !important; /* 3 */
 }
-html body .main {
+html body #root main {
   flex: 1;
 }
-html body .bg-dark {
+html body #root .bg-dark {
   background-color: #12002b;
 }
 
@@ -55,6 +60,17 @@ html body .bg-dark {
   font-size: 1.25rem;
   font-weight: bold;
   margin-bottom: 0.5rem;
+}
+
+.footer {
+  display: flex;
+  justify-content: center;
+  border-top: 2px solid #ccc;
+  padding: 2rem 0 1.5rem;
+}
+.footer .footer-text {
+  margin: 0;
+  padding: 0;
 }
 
 .hero {
@@ -140,6 +156,50 @@ html body .bg-dark {
 }
 .main-nav-item .fa-user-circle {
   margin-right: 4.4px;
+}
+
+.sign-in-content {
+  box-sizing: border-box;
+  background-color: white;
+  width: 300px;
+  margin: 0 auto;
+  margin-top: 3rem;
+  padding: 2rem;
+}
+.sign-in-content .sign-in-icon {
+  font-size: 5rem;
+}
+.sign-in-content .input-wrapper {
+  display: flex;
+  flex-direction: column;
+  text-align: left;
+  margin-bottom: 1rem;
+}
+.sign-in-content .input-wrapper label {
+  font-weight: bold;
+}
+.sign-in-content .input-wrapper input {
+  padding: 5px;
+  font-size: 1.2rem;
+}
+.sign-in-content .input-remember {
+  display: flex;
+}
+.sign-in-content .input-remember label {
+  margin-left: 0.25rem;
+}
+.sign-in-content .sign-in-button {
+  display: block;
+  width: 100%;
+  padding: 8px;
+  font-size: 1.1rem;
+  font-weight: bold;
+  margin-top: 1rem;
+  border-color: #00bc77;
+  background-color: #00bc77;
+  color: #fff;
+  text-decoration: underline;
+  cursor: pointer;
 }
 
 /*# sourceMappingURL=index.css.map */

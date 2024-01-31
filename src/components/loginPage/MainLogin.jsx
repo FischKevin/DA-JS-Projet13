@@ -26,9 +26,9 @@ const featureList = [
   },
 ];
 
-function Main() {
+function MainLogin() {
   return (
-    <>
+    <main>
       <Hero
         subtitle1="No fees."
         subtitle2="No minimum deposit."
@@ -37,8 +37,8 @@ function Main() {
         backgroundImage="/public/bank-tree.jpeg"
       />
       <Features features={featureList} />
-    </>
+    </main>
   );
 }
 
-export default Main;
+export default MainLogin;

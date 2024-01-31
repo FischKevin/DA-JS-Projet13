@@ -1,12 +1,13 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 function SignInItem() {
   return (
     <div>
-      <a className="main-nav-item" href="./sign-in.html">
+      <Link to="/signin" className="main-nav-item">
         <i className="fa fa-user-circle"></i>
         Sign In
-      </a>
+      </Link>
     </div>
   );
 }

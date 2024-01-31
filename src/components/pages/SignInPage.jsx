@@ -1,16 +1,16 @@
 import React from 'react';
 import Navbar from '/src/components/components/Navbar';
-import MainLogin from '/src/components/loginPage/MainLogin';
+import MainSignIn from '/src/components/SignInPage/MainSignIn';
 import Footer from '/src/components/components/Footer';
 
-function LoginPage() {
+function SignInPage() {
   return (
     <>
       <Navbar />
-      <MainLogin />
+      <MainSignIn />
       <Footer />
     </>
   );
 }
 
-export default LoginPage;
+export default SignInPage;
