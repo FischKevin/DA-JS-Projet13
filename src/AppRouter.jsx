@@ -5,12 +5,13 @@ import LoginPage from '/src/components/pages/LoginPage';
 import SignInPage from '/src/components/pages/SignInPage';
 import UserPage from '/src/components/pages/UserPage';
 // import useAuth from '/src/customHooks/useAuth'; 
-import { Navigate } from 'react-router-dom';
+// import { Navigate } from 'react-router-dom';
+import PrivateRoute from '/src/components/PrivateRoute';
 
-const PrivateRoute = ({ children }) => {
-  const token = localStorage.getItem('token');
-  return token ? children : <Navigate to="/signin" />;
-};
+// const PrivateRoute = ({ children }) => {
+//   const token = localStorage.getItem('token');
+//   return token ? children : <Navigate to="/signin" />;
+// };
 
 // AppRouter component: Manages the routing of the application
 function AppRouter() {

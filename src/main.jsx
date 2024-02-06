@@ -1,18 +1,19 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import { Provider } from 'react-redux';
-import { store } from './app/store';
+import { PersistGate } from 'redux-persist/integration/react'; // Assurez-vous d'importer PersistGate
+import { store, persistor } from './app/store'; // Assurez-vous que persistor est exporté depuis votre store
 import AppRouter from './AppRouter.jsx';
 import './index.css';
 
-// Créez le root une seule fois
 const root = ReactDOM.createRoot(document.getElementById('root'));
 
-// Utilisez root.render() sans passer l'élément DOM une seconde fois
 root.render(
   <React.StrictMode>
     <Provider store={store}>
-      <AppRouter />
+      <PersistGate loading={null} persistor={persistor}>
+        <AppRouter />
+      </PersistGate>
     </Provider>
   </React.StrictMode>
 );

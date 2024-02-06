@@ -1,8 +1,21 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+import { logout } from '/src/features/auth/authSlice';
+import { useNavigate } from 'react-router-dom';
 
 function SignInItem({ isLoggedIn, userName }) {
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+
+  const handleLogout = () => {
+    dispatch(logout());
+    // localStorage.removeItem('token');
+    navigate("/");
+
+  };
+
   if (isLoggedIn) {
     return (
       <div>
@@ -10,7 +23,7 @@ function SignInItem({ isLoggedIn, userName }) {
           <i className="fa fa-user-circle"></i>
           {userName}
         </Link>
-        <Link to="/" className="main-nav-item">
+        <Link onClick={handleLogout} className="main-nav-item">
           <i className="fa fa-sign-out"></i>
           Sign Out
         </Link>

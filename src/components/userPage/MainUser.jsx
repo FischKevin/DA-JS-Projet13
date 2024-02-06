@@ -1,12 +1,13 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import WelcomeMessage from './WelcomeMessage';
 
 function MainUser() {
   return (
     <>
       <main className="main bg-dark">
         <div className="header">
-          <h1>Welcome back<br />Tony Jarvis!</h1>
+          <WelcomeMessage />
           <button className="edit-button">Edit Name</button>
         </div>
         <h2 className="sr-only">Accounts</h2>

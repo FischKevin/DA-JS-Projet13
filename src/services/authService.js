@@ -18,7 +18,7 @@ const login = async (email, password) => {
 const getUserProfile = async (token) => {
   try {
     const response = await fetch('http://localhost:3001/api/v1/user/profile', {
-      method: 'POST', // Assurez-vous que c'est la bonne méthode HTTP selon votre API
+      method: 'POST',
       headers: {
         Authorization: `Bearer ${token}`,
         'Content-Type': 'application/json',
@@ -44,9 +44,7 @@ const getUserProfile = async (token) => {
   }
 };
 
-// Exportez d'autres fonctions similaires pour l'inscription, etc.
 export const authService = {
   login,
   getUserProfile,
-  // ... autres fonctions
 };
