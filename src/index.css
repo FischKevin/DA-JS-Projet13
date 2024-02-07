@@ -202,6 +202,44 @@ html body #root .bg-dark {
   cursor: pointer;
 }
 
+.editMenu {
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  width: 40%;
+  justify-content: space-between;
+  gap: 12px;
+}
+.editMenu .editData {
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+}
+.editMenu .editData input {
+  border: solid 2px #b3bcc7;
+  border-radius: 3px;
+  padding: 5px 10px;
+  font-size: 16px;
+  font-family: inherit;
+}
+.editMenu .editActions {
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+}
+.editMenu .editActions button {
+  background-color: white;
+  border-radius: 3px;
+  color: #6e70ef;
+  border: solid 2px #a9acea;
+  width: 100px;
+  padding: 5px 0;
+  font-size: 14px;
+  font-weight: 700;
+  font-family: inherit;
+  cursor: pointer;
+}
+
 .header {
   color: #fff;
   margin-bottom: 2rem;
