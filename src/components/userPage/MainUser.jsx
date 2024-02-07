@@ -1,14 +1,48 @@
-import React from 'react';
+import React, { useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import PropTypes from 'prop-types';
+import { updateProfile } from '/src/features/auth/authSlice';
+// import { authService } from '/src/services/authService';
+import { authService } from '/src/services/authService';
+
 import WelcomeMessage from './WelcomeMessage';
+import EditName from './EditName';
 
 function MainUser() {
+  const [isEditing, setIsEditing] = useState(false);
+  const { user } = useSelector((state) => state.auth);
+  const dispatch = useDispatch();
+  const token = useSelector(state => state.auth.token);
+
+  const handleSave = async (firstName, lastName) => {
+    try {
+      const updatedUser = await authService.updateUserProfile(token, { firstName, lastName });
+      dispatch(updateProfile(updatedUser));
+      setIsEditing(false);
+    } catch (error) {
+      console.error('Failed to update profile:', error);
+    }
+  };
+
+  const handleCancel = () => {
+    setIsEditing(false);
+  };
+
   return (
     <>
       <main className="main bg-dark">
         <div className="header">
           <WelcomeMessage />
-          <button className="edit-button">Edit Name</button>
+          {isEditing ? (
+            <EditName
+              firstName={user.firstName}
+              lastName={user.lastName}
+              onSave={handleSave}
+              onCancel={handleCancel}
+            />
+          ) : (
+            <button className="edit-button" onClick={() => setIsEditing(true)}>Edit Name</button>
+          )}
         </div>
         <h2 className="sr-only">Accounts</h2>
         <AccountSection 
