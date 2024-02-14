@@ -1,7 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
+// Defines the Hero component with props for subtitles, text, and a background image
 function Hero({ subtitle1, subtitle2, subtitle3, text, backgroundImage }) {
+  // Inline styles to dynamically set the background image of the hero section
   const heroStyle = {
     backgroundImage: `url(${backgroundImage})`,
   };

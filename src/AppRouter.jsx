@@ -4,14 +4,8 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import LoginPage from '/src/components/pages/LoginPage';
 import SignInPage from '/src/components/pages/SignInPage';
 import UserPage from '/src/components/pages/UserPage';
-// import useAuth from '/src/customHooks/useAuth'; 
-// import { Navigate } from 'react-router-dom';
+// Import the PrivateRoute component for protected routes
 import PrivateRoute from '/src/components/PrivateRoute';
-
-// const PrivateRoute = ({ children }) => {
-//   const token = localStorage.getItem('token');
-//   return token ? children : <Navigate to="/signin" />;
-// };
 
 // AppRouter component: Manages the routing of the application
 function AppRouter() {
@@ -22,17 +16,22 @@ function AppRouter() {
         <Route path="/" element={<LoginPage />} />
         {/* Define Route for the signin page */}
         <Route path="/signin" element={<SignInPage />} />
-        {/* Define Route for the user page */}
-        <Route path="/user" element={<PrivateRoute><UserPage /></PrivateRoute>} />
-        {/* Catch-all Route for undefined paths, leading to a 404 error page */}
-        {/* <Route path="*" element={<Error404 />} /> */}
+        {/* Define Route for the user page, wrapped in a PrivateRoute to ensure it's protected */}
+        <Route
+          path="/user"
+          element={
+            <PrivateRoute>
+              <UserPage />
+            </PrivateRoute>
+          }
+        />
       </Routes>
     </Router>
   );
 }
 
 PrivateRoute.propTypes = {
-  children: PropTypes.node.isRequired
+  children: PropTypes.node.isRequired,
 };
 
 export default AppRouter;

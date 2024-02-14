@@ -2,6 +2,7 @@ import React from 'react';
 import Hero from './Hero';
 import Features from './Features';
 
+// Define a list of features with details for each feature
 const featureList = [
   {
     imgSrc: '/public/icon-chat.png',

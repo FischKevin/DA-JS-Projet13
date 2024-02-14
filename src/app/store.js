@@ -1,39 +1,29 @@
+// Used to create a Redux store with simplified configuration
 import { configureStore } from '@reduxjs/toolkit';
-import storage from 'redux-persist/lib/storage';
-import {
-  persistReducer,
-  persistStore,
-  FLUSH,
-  REHYDRATE,
-  PAUSE,
-  PERSIST,
-  PURGE,
-  REGISTER,
-} from 'redux-persist';
-import { combineReducers } from 'redux';
-import authReducer from '../features/auth/authSlice';
+// Enables the store to be persisted across sessions
+import { persistStore } from 'redux-persist';
+// Importing the reducer that has been enhanced with persistence capabilities
+import persistedReducer from './persistedReducer';
 
-const persistConfig = {
-  key: 'root',
-  storage,
-  whitelist: ['auth'], // spécifiez les reducers que vous souhaitez persister
-};
-
-const rootReducer = combineReducers({
-  auth: authReducer,
-  // Ajoutez d'autres reducers ici
-});
-
-const persistedReducer = persistReducer(persistConfig, rootReducer);
-
+// Creating the Redux store
 export const store = configureStore({
-  reducer: persistedReducer,
+  reducer: persistedReducer, // Assigning the persisted reducer to the store's reducer
+  // Adding custom middleware configurations
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({
       serializableCheck: {
-        ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER], // Ignorer ces actions de redux-persist
+        // Ignoring specific actions from serializability checks, necessary for redux-persist to work correctly
+        ignoredActions: [
+          'persist/PERSIST',
+          'persist/REHYDRATE',
+          'persist/PAUSE',
+          'persist/PURGE',
+          'persist/FLUSH',
+          'persist/REGISTER',
+        ],
       },
     }),
 });
 
+// Creating a persistor instance for the store, enabling the state to be persisted across sessions
 export const persistor = persistStore(store);
