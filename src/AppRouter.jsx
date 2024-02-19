@@ -16,6 +16,8 @@ function AppRouter() {
         <Route path="/" element={<LoginPage />} />
         {/* Define Route for the signin page */}
         <Route path="/signin" element={<SignInPage />} />
+        {/* Define Route to redirect unknown page to / */}
+        <Route path="*" element={<LoginPage />} />
         {/* Define Route for the user page, wrapped in a PrivateRoute to ensure it's protected */}
         <Route
           path="/user"
