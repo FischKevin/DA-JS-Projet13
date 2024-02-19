@@ -12,7 +12,7 @@ const PrivateRoute = ({ children }) => {
   const token = useSelector((state) => state.auth.token);
 
   // If a token exists, render the child components; otherwise, redirect to the login page
-  return token ? children : <Navigate to="/" replace />;
+  return token ? children : <Navigate to="/signin" replace />;
 };
 
 // Export the PrivateRoute component for use in other parts of the application
