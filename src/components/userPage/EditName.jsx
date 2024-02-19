@@ -6,6 +6,19 @@ function EditName({ firstName, lastName, onSave, onCancel }) {
   // useState hooks to manage local state for first name and last name inputs
   const [newFirstName, setNewFirstName] = useState(firstName);
   const [newLastName, setNewLastName] = useState(lastName);
+  const [error, setError] = useState('');
+
+  // Function to handle saving updated user information
+  const handleSave = () => {
+    // Check if either first name or last name is empty
+    if (!newFirstName.trim() || !newLastName.trim()) {
+      setError('First name and last name are required.');
+      return;
+    }
+
+    onSave(newFirstName, newLastName);
+    setError(''); // Reset error state
+  };
 
   return (
     <div className="editMenu">
@@ -15,20 +28,25 @@ function EditName({ firstName, lastName, onSave, onCancel }) {
           type="text"
           placeholder="First Name"
           value={newFirstName} // Bind input value to newFirstName state
-          onChange={(e) => setNewFirstName(e.target.value)} // Update state on input change
+          onChange={(e) => {
+            setNewFirstName(e.target.value);
+            setError(''); // Reset error state on input change
+          }}
         />
         {/* Input for editing the last name */}
         <input
           type="text"
           placeholder="Last Name"
-          value={newLastName} // Bind input value to newLastName state
-          onChange={(e) => setNewLastName(e.target.value)} // Update state on input change
+          value={newLastName}
+          onChange={(e) => {
+            setNewLastName(e.target.value);
+            setError(''); // Reset error state on input change
+          }}
         />
       </div>
+      {error && <div className="errorMessage">{error}</div>} {/* Print error message if needed */}
       <div className="editActions">
-        {/* Save button - calls onSave prop function with new names as arguments */}
-        <button onClick={() => onSave(newFirstName, newLastName)}>Save</button>
-        {/* Cancel button - calls onCancel prop function */}
+        <button onClick={handleSave}>Save</button>
         <button onClick={onCancel}>Cancel</button>
       </div>
     </div>
