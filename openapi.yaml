@@ -1,0 +1,195 @@
+openapi: 3.0.0
+info:
+  title: Transactions API
+  version: "1.0.0"
+  description: API for managing financial transactions.
+
+servers:
+  - url: http://localhost:3001/api/v1
+    description: Local server
+
+paths:
+  /transactions:
+    get:
+      summary: Get all transactions for the current month, grouped by account
+      operationId: getMonthlyTransactions
+      tags:
+        - Transactions
+      security:
+        - bearerAuth: []
+      responses:
+        '200':
+          description: A list of transactions grouped by account
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GroupedTransactions'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+    post:
+      summary: Create a new transaction
+      operationId: createTransaction
+      tags:
+        - Transactions
+      security:
+        - bearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TransactionCreate'
+      responses:
+        '201':
+          description: Transaction created successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TransactionDetails'
+        '400':
+          description: Bad Request, e.g., missing required fields or invalid data format
+        '401':
+          description: Unauthorized due to missing or invalid token
+        '403':
+          description: Forbidden, access to the resource is denied
+        '500':
+          description: Internal Server Error
+
+  /transactions/{transactionId}:
+    get:
+      summary: Get details of a specific transaction
+      operationId: getTransactionDetails
+      tags:
+        - Transactions
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: transactionId
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Details of a specific transaction
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TransactionDetails'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Transaction not found
+        '500':
+          description: Internal Server Error
+    put:
+      summary: Update a specific transaction's information
+      operationId: updateTransaction
+      tags:
+        - Transactions
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: transactionId
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TransactionUpdate'
+      responses:
+        '200':
+          description: Transaction updated successfully
+        '400':
+          description: Bad Request
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Transaction not found
+        '500':
+          description: Internal Server Error
+    
+components:
+  schemas:
+    GroupedTransactions:
+      type: object
+      additionalProperties:
+        type: array
+        items:
+          $ref: '#/components/schemas/TransactionDetails'
+    TransactionDetails:
+      type: object
+      properties:
+        id:
+          type: string
+        accountId:
+          type: string
+        date:
+          type: string
+          format: date
+        type:
+          type: string
+        amount:
+          type: number
+        category:
+          type: string
+          enum: [Food, Travel, House, Hobbies, Other]
+        notes:
+          type: string
+    TransactionCreate:
+      type: object
+      properties:
+        accountId:
+          type: string
+        date:
+          type: string
+          format: date
+        type:
+          type: string
+        amount:
+          type: number
+        category:
+          type: string
+          enum: [Food, Travel, House, Hobbies, Other]
+        notes:
+          type: string
+      required:
+        - accountId
+        - date
+        - type
+        - amount
+        - category
+    TransactionUpdate:
+      type: object
+      properties:
+        category:
+          type: string
+          enum:
+            - Food
+            - Travel
+            - House
+            - Hobbies
+            - Other
+        notes:
+          type: string
+      required:
+        - category
+        - notes
+        
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
